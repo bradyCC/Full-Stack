@@ -11,9 +11,8 @@ const cors = require('cors');
 
 var app = express();
 
-app.use(cors());
-
-require('./db')(app);
+app.use(cors());  // 处理跨域
+require('./db')(app); // 链接数据库
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
