@@ -16,6 +16,7 @@
 2. 分类列表
 3. 修改分类
 4. 删除分类
+5. 子分类关联
 
 ## 项目地址
 GitHub: [Full-Stack](https://github.com/bradyCC/Full-Stack)

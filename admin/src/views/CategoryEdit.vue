@@ -2,6 +2,11 @@
   <div class="">
     <h1>{{ id? '编辑': '新建' }}分类</h1>
     <el-form label-width="120px" @submit.native.prevent="save">
+      <el-form-item label="上级分类">
+        <el-select v-model="model.parent">
+          <el-option v-for="item in parents" :key="item._id" :label="item.name" :value="item._id"></el-option>
+        </el-select>
+      </el-form-item>
       <el-form-item label="分类名称">
         <el-input v-model="model.name"></el-input>
       </el-form-item>
@@ -20,14 +25,27 @@
     },
     data () {
       return {
-        model: {} // 分类名称
+        model: {}, // 分类名称
+        parents: [], //上级分类
       }
     },
     mounted () {
+      // 上级分类基础数据
+      this.fetchParents()
       // 如果ID存在，即为编辑，获取数据赋值
-      this.id && this.fetch();
+      this.id && this.fetch()
     },
     methods: {
+      // 获取上级分类
+      async fetchParents () {
+        let res = await this.$http.get(`categories`)
+        this.parents = res.data
+      },
+      // 获取分类名称
+      async fetch () {
+        let res = await this.$http.get(`categories/${this.id}`)
+        this.model = res.data
+      },
       // 保存数据
       async save () {
         let res
@@ -57,11 +75,6 @@
         // 跳转至分类列表
         this.$router.push('/categories/list')
       },
-      // 获取分类名称
-      async fetch () {
-        let res = await this.$http.get(`categories/${this.id}`)
-        this.model = res.data
-      }
     },
     watch: {
       // 监听分类ID
