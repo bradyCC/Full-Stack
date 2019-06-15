@@ -14,7 +14,9 @@ export default new Router({
       component: Main,
       children: [
         { path: '/categories/create', component: CategoryEdit }, // 创建分类
-        { path: '/categories/list', component: CategoryList } // 分类列表
+        { path: '/categories/edit/:id', component: CategoryEdit, props: true }, // 编辑分类
+        { path: '/categories/list', component: CategoryList }, // 分类列表
+
       ]
     },
     // {
