@@ -11,6 +11,11 @@
 ## 管理后台 
 1. 基于Element UI 的管理后台基础搭建
 
+功能：
+1. 新建分类（多层级）
+2. 分类列表
+3. 修改分类
+4. 删除分类
 
 ## 项目地址
 GitHub: [Full-Stack](https://github.com/bradyCC/Full-Stack)
