@@ -21,11 +21,16 @@
       }
     },
     methods: {
-      save () {
-        // this.$http.post()
+      async save () {
+        let res = await this.$http.post('categories', this.model)
+        this.$router.push('/categories/list')
+        this.$message({
+          type: 'success',
+          message: '保存成功'
+        })
       }
     }
-  }
+ }
 </script>
 
 <style scoped>

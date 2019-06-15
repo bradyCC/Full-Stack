@@ -92,9 +92,13 @@
       return {
         tableData: Array(20).fill(item)
       }
+    },
+    mounted () {
+      console.log(this.$http)
     }
   };
 </script>
+
 
 <style>
   .el-header {
@@ -107,5 +111,3 @@
     color: #333;
   }
 </style>
-
-
