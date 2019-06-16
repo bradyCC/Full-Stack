@@ -20,19 +20,19 @@
     name: 'CategoryList',
     data () {
       return {
-        items: [] // 分类列表数据
+        items: [] // 列表数据
       }
     },
     mounted () {
       this.fetch();
     },
     methods: {
-      // 获取分类列表
+      // 获取列表
       async fetch () {
         let res = await this.$http.get('rest/categories');
         this.items = res.data;
       },
-      // 删除分类
+      // 删除
       async remove (row) {
         this.$confirm(`是否确认要删除分类 "${row.name}"`, '提示', {
           confirmButtonText: '确定',

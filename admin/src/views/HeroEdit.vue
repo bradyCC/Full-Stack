@@ -1,13 +1,13 @@
 <template>
   <div class="">
-    <h1>{{ id? '编辑': '新建' }}物品</h1>
+    <h1>{{ id? '编辑': '新建' }}英雄</h1>
     <el-form label-width="120px" @submit.native.prevent="save">
-      <el-form-item label="物品名称">
+      <el-form-item label="英雄名称">
         <el-input v-model="model.name"></el-input>
       </el-form-item>
-      <el-form-item label="图标">
+      <el-form-item label="头像">
         <el-upload class="avatar-uploader" :action="$http.defaults.baseURL + 'upload'" :show-file-list="false" :on-success="afterUpload">
-          <img v-if="model.icon" :src="model.icon" class="avatar">
+          <img v-if="model.avatar" :src="model.avatar" class="avatar">
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
       </el-form-item>
@@ -20,13 +20,16 @@
 
 <script>
   export default {
-    name: 'ItemEdit',
+    name: 'HeroEdit',
     props: {
       id: {}  // ID
     },
     data () {
       return {
-        model: {}, // 物品
+        model: {
+          name: ``,
+          avatar: ``,
+        }, // 英雄
       }
     },
     mounted () {
@@ -37,12 +40,12 @@
       // 上传图片回显
       afterUpload (res) {
         // 显式赋值
-        this.$set(this.model, 'icon', res.url);
-        // this.model.icon = res.url;
+        // this.$set(this.model, 'avatar', res.url);
+        this.model.avatar = res.url;
       },
       // 获取名称
       async fetch () {
-        let res = await this.$http.get(`rest/items/${this.id}`)
+        let res = await this.$http.get(`rest/heros/${this.id}`)
         this.model = res.data
       },
       // 保存数据
@@ -51,19 +54,19 @@
         // 根据ID判断是新建还是编辑
         if (this.id) {
           // 编辑
-          res = await this.$http.put(`rest/items/${this.id}`, this.model)
+          res = await this.$http.put(`rest/heros/${this.id}`, this.model)
         } else {
           // 新建
-          res = await this.$http.post('rest/items', this.model)
+          res = await this.$http.post('rest/heros', this.model)
         }
 
         // 操作提示
         this.$message({
           type: 'success',
-          message: `${JSON.parse(res.config.data).name}物品保存成功`
+          message: `${JSON.parse(res.config.data).name}英雄保存成功`
         })
         // 跳转至列表
-        this.$router.push('/items/list')
+        this.$router.push('/heros/list')
       },
     },
     watch: {

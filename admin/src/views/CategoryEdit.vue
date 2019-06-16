@@ -21,11 +21,11 @@
   export default {
     name: 'CategoryEdit',
     props: {
-      id: {}  // 分类ID
+      id: {}  // ID
     },
     data () {
       return {
-        model: {}, // 分类名称
+        model: {}, // 名称
         parents: [], //上级分类
       }
     },
@@ -41,7 +41,7 @@
         let res = await this.$http.get(`rest/categories`)
         this.parents = res.data
       },
-      // 获取分类名称
+      // 获取名称
       async fetch () {
         let res = await this.$http.get(`rest/categories/${this.id}`)
         this.model = res.data
@@ -49,22 +49,13 @@
       // 保存数据
       async save () {
         let res
-        // 判断数据是否为空
-        if (this.model.name) {
-          // 根据分类ID判断是新建还是编辑
-          if (this.id) {
-            // 编辑
-            res = await this.$http.put(`rest/categories/${this.id}`, this.model)
-          } else {
-            // 新建
-            res = await this.$http.post('rest/categories', this.model)
-          }
+        // 根据ID判断是新建还是编辑
+        if (this.id) {
+          // 编辑
+          res = await this.$http.put(`rest/categories/${this.id}`, this.model)
         } else {
-          this.$message({
-            type: 'error',
-            message: '请输入分类名称'
-          })
-          return false
+          // 新建
+          res = await this.$http.post('rest/categories', this.model)
         }
 
         // 操作提示
@@ -72,12 +63,12 @@
           type: 'success',
           message: `${JSON.parse(res.config.data).name}分类保存成功`
         })
-        // 跳转至分类列表
+        // 跳转至列表
         this.$router.push('/categories/list')
       },
     },
     watch: {
-      // 监听分类ID
+      // 监听ID
       id () {
         this.model = {}
       }

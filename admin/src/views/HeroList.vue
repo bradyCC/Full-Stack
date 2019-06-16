@@ -1,17 +1,17 @@
 <template>
   <div class="">
-    <h1>物品列表</h1>
+    <h1>英雄列表</h1>
     <el-table :data="items">
       <el-table-column prop="_id" label="ID" width="220"></el-table-column>
-      <el-table-column prop="name" label="物品名称"></el-table-column>
-      <el-table-column prop="icon" label="图标">
+      <el-table-column prop="name" label="英雄名称"></el-table-column>
+      <el-table-column prop="avatar" label="头像">
         <template slot-scope="scope">
-          <img :src="scope.row.icon" alt="" style="height: 3rem;">
+          <img :src="scope.row.avatar" alt="" style="height: 3rem;">
         </template>
       </el-table-column>
       <el-table-column fixed="right" label="操作" width="180">
         <template slot-scope="scope">
-          <el-button type="text" size="small" @click="$router.push(`/items/edit/${scope.row._id}`)">编辑</el-button>
+          <el-button type="text" size="small" @click="$router.push(`/heros/edit/${scope.row._id}`)">编辑</el-button>
           <el-button type="text" size="small" @click="remove(scope.row)">删除</el-button>
         </template>
       </el-table-column>
@@ -21,7 +21,7 @@
 
 <script>
   export default {
-    name: 'ItemList',
+    name: 'HeroList',
     data () {
       return {
         items: [] // 列表数据
@@ -33,17 +33,17 @@
     methods: {
       // 获取列表
       async fetch () {
-        let res = await this.$http.get('rest/items');
+        let res = await this.$http.get('rest/heros');
         this.items = res.data;
       },
       // 删除
       async remove (row) {
-        this.$confirm(`是否确认要删除物品 "${row.name}"`, '提示', {
+        this.$confirm(`是否确认要删除英雄 "${row.name}"`, '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(async () => {
-          let res = await this.$http.delete(`rest/items/${row._id}`)
+          let res = await this.$http.delete(`rest/heros/${row._id}`)
           if (res.data.success) {
             this.$message({
               type: 'success',
