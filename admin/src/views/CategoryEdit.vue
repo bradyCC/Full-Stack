@@ -18,62 +18,62 @@
 </template>
 
 <script>
-  export default {
-    name: 'CategoryEdit',
-    props: {
-      id: {}  // ID
-    },
-    data () {
-      return {
-        model: {}, // 名称
-        parents: [], //上级分类
-      }
-    },
-    mounted () {
-      // 上级分类基础数据
-      this.fetchParents()
-      // 如果ID存在，即为编辑，获取数据赋值
-      this.id && this.fetch()
-    },
-    methods: {
-      // 获取上级分类
-      async fetchParents () {
-        let res = await this.$http.get(`rest/categories`)
-        this.parents = res.data
-      },
-      // 数据回显
-      async fetch () {
-        let res = await this.$http.get(`rest/categories/${this.id}`)
-        this.model = res.data
-      },
-      // 保存数据
-      async save () {
-        let res
-        // 根据ID判断是新建还是编辑
-        if (this.id) {
-          // 编辑
-          res = await this.$http.put(`rest/categories/${this.id}`, this.model)
-        } else {
-          // 新建
-          res = await this.$http.post('rest/categories', this.model)
-        }
-
-        // 操作提示
-        this.$message({
-          type: 'success',
-          message: `保存成功`
-        })
-        // 跳转至列表
-        this.$router.push('/categories/list')
-      },
-    },
-    watch: {
-      // 监听ID
-      id () {
-        this.model = {}
-      }
+export default {
+  name: 'CategoryEdit',
+  props: {
+    id: {}  // ID
+  },
+  data () {
+    return {
+      model: {}, // 名称
+      parents: [], //上级分类
     }
- }
+  },
+  mounted () {
+    // 上级分类基础数据
+    this.fetchParents()
+    // 如果ID存在，即为编辑，获取数据赋值
+    this.id && this.fetch()
+  },
+  methods: {
+    // 获取上级分类
+    async fetchParents () {
+      let res = await this.$http.get(`rest/categories`)
+      this.parents = res.data
+    },
+    // 数据回显
+    async fetch () {
+      let res = await this.$http.get(`rest/categories/${this.id}`)
+      this.model = res.data
+    },
+    // 保存数据
+    async save () {
+      let res
+      // 根据ID判断是新建还是编辑
+      if (this.id) {
+        // 编辑
+        res = await this.$http.put(`rest/categories/${this.id}`, this.model)
+      } else {
+        // 新建
+        res = await this.$http.post('rest/categories', this.model)
+      }
+
+      // 操作提示
+      this.$message({
+        type: 'success',
+        message: `保存成功`
+      })
+      // 跳转至列表
+      this.$router.push('/categories/list')
+    },
+  },
+  watch: {
+    // 监听ID
+    id () {
+      this.model = {}
+    }
+  }
+}
 </script>
 
 <style scoped>

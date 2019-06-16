@@ -87,125 +87,125 @@
 </template>
 
 <script>
-  export default {
-    name: 'HeroEdit',
-    props: {
-      id: {}  // ID
-    },
-    data () {
-      return {
-        categories: [], // 类型基础数据
-        items: [], // 装备基础数据
-        model: {
-          name: ``,
-          avatar: ``,
-          title: ``,
-          categories: ``,
-          scores: {
-            difficult: 0,
-            skills: 0,
-            attack: 0,
-            survive: 0,
-          },
-          items1: [],
-          items2: [],
-          usageTips: ``,
-          battleTips: ``,
-          teamTips: ``,
-          // skills: [
-          //   {
-          //     name: ``,
-          //     icon: ``,
-          //     description: ``,
-          //     tips: ``
-          //   }
-          // ],
-        }, // 英雄
-      }
-    },
-    mounted () {
-      // 获取类型基础数据
-      this.fetchCategories();
-      // 获取装备基础数据
-      this.fetchItems();
-      // 如果ID存在，即为编辑，获取数据赋值
-      this.id && this.fetch()
-    },
-    methods: {
-      // 上传图片回显
-      afterUpload (res) {
-        // 显式赋值
-        // this.$set(this.model, 'avatar', res.url)
-        this.model.avatar = res.url
-      },
-      // 数据回显
-      async fetch () {
-        let res = await this.$http.get(`rest/heros/${this.id}`)
-        // this.model = res.data
-        this.model = Object.assign({}, this.model, res.data)
-      },
-      // 获取类型
-      async fetchCategories () {
-        let res = await this.$http.get('rest/categories')
-        this.categories = res.data
-      },
-      // 获取类型
-      async fetchItems () {
-        let res = await this.$http.get('rest/items')
-        this.items = res.data
-      },
-      // 保存数据
-      async save () {
-        let res
-        // 根据ID判断是新建还是编辑
-        if (this.id) {
-          // 编辑
-          res = await this.$http.put(`rest/heros/${this.id}`, this.model)
-        } else {
-          // 新建
-          res = await this.$http.post('rest/heros', this.model)
-        }
-
-        // 操作提示
-        this.$message({
-          type: 'success',
-          message: `保存成功`
-        })
-        // 跳转至列表
-        this.$router.push('/heros/list')
-      },
-    },
-    watch: {
-      // 监听ID
-      id () {
-        this.model = {}
-      }
+export default {
+  name: 'HeroEdit',
+  props: {
+    id: {}  // ID
+  },
+  data () {
+    return {
+      categories: [], // 类型基础数据
+      items: [], // 装备基础数据
+      model: {
+        name: ``,
+        avatar: ``,
+        title: ``,
+        categories: ``,
+        scores: {
+          difficult: 0,
+          skills: 0,
+          attack: 0,
+          survive: 0,
+        },
+        items1: [],
+        items2: [],
+        usageTips: ``,
+        battleTips: ``,
+        teamTips: ``,
+        // skills: [
+        //   {
+        //     name: ``,
+        //     icon: ``,
+        //     description: ``,
+        //     tips: ``
+        //   }
+        // ],
+      }, // 英雄
     }
- }
+  },
+  mounted () {
+    // 获取类型基础数据
+    this.fetchCategories();
+    // 获取装备基础数据
+    this.fetchItems();
+    // 如果ID存在，即为编辑，获取数据赋值
+    this.id && this.fetch()
+  },
+  methods: {
+    // 上传图片回显
+    afterUpload (res) {
+      // 显式赋值
+      // this.$set(this.model, 'avatar', res.url)
+      this.model.avatar = res.url
+    },
+    // 数据回显
+    async fetch () {
+      let res = await this.$http.get(`rest/heros/${this.id}`)
+      // this.model = res.data
+      this.model = Object.assign({}, this.model, res.data)
+    },
+    // 获取类型
+    async fetchCategories () {
+      let res = await this.$http.get('rest/categories')
+      this.categories = res.data
+    },
+    // 获取类型
+    async fetchItems () {
+      let res = await this.$http.get('rest/items')
+      this.items = res.data
+    },
+    // 保存数据
+    async save () {
+      let res
+      // 根据ID判断是新建还是编辑
+      if (this.id) {
+        // 编辑
+        res = await this.$http.put(`rest/heros/${this.id}`, this.model)
+      } else {
+        // 新建
+        res = await this.$http.post('rest/heros', this.model)
+      }
+
+      // 操作提示
+      this.$message({
+        type: 'success',
+        message: `保存成功`
+      })
+      // 跳转至列表
+      this.$router.push('/heros/list')
+    },
+  },
+  watch: {
+    // 监听ID
+    id () {
+      this.model = {}
+    }
+  }
+}
 </script>
 
 <style>
-  .avatar-uploader .el-upload {
-    border: 1px dashed #d9d9d9;
-    border-radius: 6px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-  }
-  .avatar-uploader .el-upload:hover {
-    border-color: #409EFF;
-  }
-  .avatar-uploader-icon {
-    font-size: 28px;
-    color: #8c939d;
-    width: 5rem;
-    height: 5rem;
-    line-height: 5rem;
-    text-align: center;
-  }
-  .avatar {
-    width: 5rem;
-    height: 5rem;
-    display: block;
-  }
+.avatar-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.avatar-uploader .el-upload:hover {
+  border-color: #409EFF;
+}
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 5rem;
+  height: 5rem;
+  line-height: 5rem;
+  text-align: center;
+}
+.avatar {
+  width: 5rem;
+  height: 5rem;
+  display: block;
+}
 </style>

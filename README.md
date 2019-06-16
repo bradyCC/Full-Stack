@@ -15,7 +15,7 @@
 
 3.分类列表
 
-4.修改分类
+4.编辑分类
 
 5.删除分类
 
@@ -29,7 +29,13 @@
 
 10.英雄管理
 
-11.
+11.编辑英雄（关联、多选el-select, multiple）
+
+12.编辑技能
+
+13.文章管理
+
+
 
 ## 项目地址
 GitHub: [Full-Stack](https://github.com/bradyCC/Full-Stack)

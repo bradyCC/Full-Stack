@@ -19,84 +19,84 @@
 </template>
 
 <script>
-  export default {
-    name: 'ItemEdit',
-    props: {
-      id: {}  // ID
-    },
-    data () {
-      return {
-        model: {}, // 物品
-      }
-    },
-    mounted () {
-      // 如果ID存在，即为编辑，获取数据赋值
-      this.id && this.fetch()
-    },
-    methods: {
-      // 上传图片回显
-      afterUpload (res) {
-        // 显式赋值
-        this.$set(this.model, 'icon', res.url)
-        // this.model.icon = res.url
-      },
-      // 数据回显
-      async fetch () {
-        let res = await this.$http.get(`rest/items/${this.id}`)
-        this.model = res.data
-      },
-      // 保存数据
-      async save () {
-        let res
-        // 根据ID判断是新建还是编辑
-        if (this.id) {
-          // 编辑
-          res = await this.$http.put(`rest/items/${this.id}`, this.model)
-        } else {
-          // 新建
-          res = await this.$http.post('rest/items', this.model)
-        }
-
-        // 操作提示
-        this.$message({
-          type: 'success',
-          message: `保存成功`
-        })
-        // 跳转至列表
-        this.$router.push('/items/list')
-      },
-    },
-    watch: {
-      // 监听ID
-      id () {
-        this.model = {}
-      }
+export default {
+  name: 'ItemEdit',
+  props: {
+    id: {}  // ID
+  },
+  data () {
+    return {
+      model: {}, // 物品
     }
- }
+  },
+  mounted () {
+    // 如果ID存在，即为编辑，获取数据赋值
+    this.id && this.fetch()
+  },
+  methods: {
+    // 上传图片回显
+    afterUpload (res) {
+      // 显式赋值
+      this.$set(this.model, 'icon', res.url)
+      // this.model.icon = res.url
+    },
+    // 数据回显
+    async fetch () {
+      let res = await this.$http.get(`rest/items/${this.id}`)
+      this.model = res.data
+    },
+    // 保存数据
+    async save () {
+      let res
+      // 根据ID判断是新建还是编辑
+      if (this.id) {
+        // 编辑
+        res = await this.$http.put(`rest/items/${this.id}`, this.model)
+      } else {
+        // 新建
+        res = await this.$http.post('rest/items', this.model)
+      }
+
+      // 操作提示
+      this.$message({
+        type: 'success',
+        message: `保存成功`
+      })
+      // 跳转至列表
+      this.$router.push('/items/list')
+    },
+  },
+  watch: {
+    // 监听ID
+    id () {
+      this.model = {}
+    }
+  }
+}
 </script>
 
 <style>
-  .avatar-uploader .el-upload {
-    border: 1px dashed #d9d9d9;
-    border-radius: 6px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-  }
-  .avatar-uploader .el-upload:hover {
-    border-color: #409EFF;
-  }
-  .avatar-uploader-icon {
-    font-size: 28px;
-    color: #8c939d;
-    width: 178px;
-    height: 178px;
-    line-height: 178px;
-    text-align: center;
-  }
-  .avatar {
-    width: 178px;
-    height: 178px;
-    display: block;
-  }
+.avatar-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.avatar-uploader .el-upload:hover {
+  border-color: #409EFF;
+}
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 178px;
+  height: 178px;
+  line-height: 178px;
+  text-align: center;
+}
+.avatar {
+  width: 178px;
+  height: 178px;
+  display: block;
+}
 </style>
