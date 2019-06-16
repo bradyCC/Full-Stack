@@ -9,13 +9,13 @@ module.exports = function() {
   // });
   let router = express.Router();
 
-  // 创建分类
+  // 创建
   router.post('/', async (req, res) => {
     const model = await req.Model.create(req.body);
     res.send(model);
   });
 
-  // 获取分类列表
+  // 获取列表
   router.get('/', async (req, res) => {
     const queryOptions = {};
     if (req.Model.modelName === 'Category') {
@@ -25,19 +25,19 @@ module.exports = function() {
     res.send(items);
   });
 
-  // 获取分类详情
+  // 获取详情
   router.get('/:id', async (req, res) => {
     const model = await req.Model.findById(req.params.id);
     res.send(model);
   });
 
-  // 编辑分类
+  // 编辑
   router.put('/:id', async (req, res) => {
     const model = await req.Model.findByIdAndUpdate(req.params.id, req.body);
     res.send(model);
   });
 
-  // 删除分类
+  // 删除
   router.delete('/:id', async (req, res) => {
     await req.Model.findByIdAndDelete(req.params.id, req.body);
     res.send({
