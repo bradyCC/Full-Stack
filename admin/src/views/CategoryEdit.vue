@@ -38,12 +38,12 @@
     methods: {
       // 获取上级分类
       async fetchParents () {
-        let res = await this.$http.get(`categories`)
+        let res = await this.$http.get(`rest/categories`)
         this.parents = res.data
       },
       // 获取分类名称
       async fetch () {
-        let res = await this.$http.get(`categories/${this.id}`)
+        let res = await this.$http.get(`rest/categories/${this.id}`)
         this.model = res.data
       },
       // 保存数据
@@ -54,10 +54,10 @@
           // 根据分类ID判断是新建还是编辑
           if (this.id) {
             // 编辑
-            res = await this.$http.put(`categories/${this.id}`, this.model)
+            res = await this.$http.put(`rest/categories/${this.id}`, this.model)
           } else {
             // 新建
-            res = await this.$http.post('categories', this.model)
+            res = await this.$http.post('rest/categories', this.model)
           }
         } else {
           this.$message({

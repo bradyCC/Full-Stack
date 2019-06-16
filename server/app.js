@@ -8,6 +8,7 @@ var indexRouter = require('./routes/index');
 var adminRouter = require('./routes/admin');
 
 const cors = require('cors');
+const inflection = require('inflection');
 
 var app = express();
 
@@ -25,7 +26,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/admin/api', adminRouter());
+app.use('/admin/api/rest/:resourse', async (req, res, next) => {
+  const modelName = inflection.classify(req.params.resourse); // 获取参数大写类名
+  req.Model = require(`./models/${modelName}`); // 获取Model模型
+  next()
+}, adminRouter());
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

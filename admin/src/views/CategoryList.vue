@@ -29,7 +29,7 @@
     methods: {
       // 获取分类列表
       async fetch () {
-        let res = await this.$http.get('categories');
+        let res = await this.$http.get('rest/categories');
         this.items = res.data;
       },
       // 删除分类
@@ -39,7 +39,7 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(async () => {
-          let res = await this.$http.delete(`categories/${row._id}`)
+          let res = await this.$http.delete(`rest/categories/${row._id}`)
           if (res.data.success) {
             this.$message({
               type: 'success',

@@ -17,7 +17,11 @@
 + 删除分类
 + 子分类关联
 
-2.通用 CURD 接口
+2.通用 CRUD 接口
++ 定义接口时设置动态参数
++ 处理请求时，优先将动态参数，用于匹配对应的Model类
++ 使用inflection 用于将小写转为对应大写
++ 通过next() 传递给后续操作
 
 ## 项目地址
 GitHub: [Full-Stack](https://github.com/bradyCC/Full-Stack)
