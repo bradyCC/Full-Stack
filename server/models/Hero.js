@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const schema = new mongoose.Schema({
   name: { type: String }, // 名称
   avatar: { type: String }, // 头像
-  title: { type: String },  //
+  title: { type: String },  // 称号
   categories: [{ type: mongoose.SchemaTypes.ObjectId, ref: 'Category' }], // 职业，关联
   scores: {
     difficult: { type: Number },  // 难度

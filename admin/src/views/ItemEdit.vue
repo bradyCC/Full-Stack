@@ -2,7 +2,7 @@
   <div class="">
     <h1>{{ id? '编辑': '新建' }}物品</h1>
     <el-form label-width="120px" @submit.native.prevent="save">
-      <el-form-item label="物品名称">
+      <el-form-item label="名称">
         <el-input v-model="model.name"></el-input>
       </el-form-item>
       <el-form-item label="图标">
@@ -40,7 +40,7 @@
         this.$set(this.model, 'icon', res.url);
         // this.model.icon = res.url;
       },
-      // 获取名称
+      // 数据回显
       async fetch () {
         let res = await this.$http.get(`rest/items/${this.id}`)
         this.model = res.data

@@ -7,7 +7,7 @@
           <el-option v-for="item in parents" :key="item._id" :label="item.name" :value="item._id"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="分类名称">
+      <el-form-item label="名称">
         <el-input v-model="model.name"></el-input>
       </el-form-item>
       <el-form-item>
@@ -41,7 +41,7 @@
         let res = await this.$http.get(`rest/categories`)
         this.parents = res.data
       },
-      // 获取名称
+      // 数据回显
       async fetch () {
         let res = await this.$http.get(`rest/categories/${this.id}`)
         this.model = res.data
