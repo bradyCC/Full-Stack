@@ -18,7 +18,7 @@ module.exports = function() {
   // 获取分类列表
   router.get('/', async (req, res) => {
     const queryOptions = {};
-    if (req.Model.modelName == 'Category') {
+    if (req.Model.modelName === 'Category') {
       queryOptions.populate = 'parent';
     }
     const items = await req.Model.find().setOptions(queryOptions).limit(10);
