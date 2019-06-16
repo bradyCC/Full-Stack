@@ -17,7 +17,11 @@ module.exports = function() {
 
   // 获取分类列表
   router.get('/', async (req, res) => {
-    const items = await req.Model.find().populate('parent').limit(10);   // populate 返回关联查询数据
+    const queryOptions = {};
+    if (req.Model.modelName == 'Category') {
+      queryOptions.populate = 'parent';
+    }
+    const items = await req.Model.find().setOptions(queryOptions).limit(10);
     res.send(items);
   });
 
