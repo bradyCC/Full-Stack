@@ -37,8 +37,8 @@
       // 上传图片回显
       afterUpload (res) {
         // 显式赋值
-        this.$set(this.model, 'icon', res.url);
-        // this.model.icon = res.url;
+        this.$set(this.model, 'icon', res.url)
+        // this.model.icon = res.url
       },
       // 数据回显
       async fetch () {

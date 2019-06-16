@@ -100,8 +100,8 @@
       // 上传图片回显
       afterUpload (res) {
         // 显式赋值
-        // this.$set(this.model, 'avatar', res.url);
-        this.model.avatar = res.url;
+        // this.$set(this.model, 'avatar', res.url)
+        this.model.avatar = res.url
       },
       // 数据回显
       async fetch () {
@@ -111,12 +111,12 @@
       },
       // 获取类型
       async fetchCategories () {
-        let res = await this.$http.get('rest/categories');
+        let res = await this.$http.get('rest/categories')
         this.categories = res.data
       },
       // 获取类型
       async fetchItems () {
-        let res = await this.$http.get('rest/items');
+        let res = await this.$http.get('rest/items')
         this.items = res.data
       },
       // 保存数据

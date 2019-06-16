@@ -16,6 +16,7 @@
         </template>
       </el-table-column>
     </el-table>
+    <el-pagination v-if="items.length > 0" @current-change="currentChange" :current-page="nowpage" :page-size="pageSize" :total="items.length"></el-pagination>
   </div>
 </template>
 
@@ -24,17 +25,29 @@
     name: 'ItemList',
     data () {
       return {
-        items: [] // 列表数据
+        items: [], // 列表数据
+        dataList: [],
+        nowpage: 1, //当前页
+        pageSize: 10, //每页显示条数
       }
     },
     mounted () {
-      this.fetch();
+      this.fetch()
     },
     methods: {
       // 获取列表
       async fetch () {
-        let res = await this.$http.get('rest/items');
-        this.items = res.data;
+        let res = await this.$http.get('rest/items')
+        this.items = res.data
+        // 默认显示第一页
+        this.currentChange(1)
+      },
+      // 分页
+      currentChange (page) {
+        this.nowpage = page
+        let start = (page - 1) * this.pageSize
+        let end = start + this.pageSize
+        this.dataList = this.items.slice(start, end)
       },
       // 删除
       async remove (row) {
@@ -48,20 +61,20 @@
             this.$message({
               type: 'success',
               message: '删除成功!'
-            });
-            this.fetch();
+            })
+            this.fetch()
           } else {
             this.$message({
               type: 'error',
               message: '删除失败，请重试!'
-            });
+            })
           }
         }).catch(() => {
           this.$message({
             type: 'info',
             message: '已取消删除'
-          });
-        });
+          })
+        })
       }
     }
   }
