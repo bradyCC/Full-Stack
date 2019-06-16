@@ -60,7 +60,7 @@
         // 操作提示
         this.$message({
           type: 'success',
-          message: `${JSON.parse(res.config.data).name}物品保存成功`
+          message: `保存成功`
         })
         // 跳转至列表
         this.$router.push('/items/list')
