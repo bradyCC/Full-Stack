@@ -16,7 +16,6 @@ module.exports = function() {
     // if (!user) {
     //   return res.status(422).send({message: '用户不存在'});
     // }
-
     assert(user, 422, '用户不存在');
 
     // 2.校验密码
@@ -32,3 +31,4 @@ module.exports = function() {
 
   return router;
 }
+
