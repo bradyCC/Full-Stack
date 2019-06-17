@@ -16,6 +16,9 @@ import ArticleList from './views/ArticleList'
 // 广告位
 import AdEdit from './views/AdEdit'
 import AdList from './views/AdList'
+// 管理员
+import AdminUserEdit from './views/AdminUserEdit'
+import AdminUserList from './views/AdminUserList'
 
 Vue.use(Router)
 
@@ -45,6 +48,10 @@ export default new Router({
         { path: '/ads/create', component: AdEdit }, // 创建广告位
         { path: '/ads/edit/:id', component: AdEdit, props: true }, // 编辑广告位
         { path: '/ads/list', component: AdList }, // 广告位列表
+
+        { path: '/admin_users/create', component: AdminUserEdit }, // 创建管理员
+        { path: '/admin_users/edit/:id', component: AdminUserEdit, props: true }, // 编辑管理员
+        { path: '/admin_users/list', component: AdminUserList }, // 管理员列表
       ]
     },
     // {
