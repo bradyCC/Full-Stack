@@ -2,7 +2,11 @@
  * Created by brady on 2019/6/15.
  */
 const express = require('express');
+
 const jwt = require('jsonwebtoken');
+const AdminUser = require('../../models/AdminUser');
+
+const assert = require('http-assert');
 
 module.exports = function() {
   // let router = express.Router({
@@ -18,8 +22,13 @@ module.exports = function() {
 
   // 获取列表
   router.get('/', async (req, res, next) => {
+    // 获取token
     const token = String(req.headers.authorization || '').split(' ').pop();
-    const tokenData = jwt.verify(token, global.secret);
+    // 解析token返回id
+    const { id } = jwt.verify(token, global.secret);
+    // 查询用户表
+    req.user = await AdminUser.findById(id);
+
     next()
   }, async (req, res) => {
     const queryOptions = {};

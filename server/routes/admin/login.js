@@ -4,6 +4,8 @@
 const express = require('express');
 const AdminUser = require('../../models/AdminUser');
 
+const assert = require('http-assert');
+
 module.exports = function() {
   let router = express.Router();
 
@@ -11,9 +13,12 @@ module.exports = function() {
     const { username, password } = req.body;
     // 1.验证用户名是否存在
     const user = await AdminUser.findOne({username}).select('+password');
-    if (!user) {
-      return res.status(422).send({message: '用户不存在'});
-    }
+    // if (!user) {
+    //   return res.status(422).send({message: '用户不存在'});
+    // }
+
+    assert(user, 422, '用户不存在');
+
     // 2.校验密码
     const isValid = require('bcrypt').compareSync(password, user.password);
     if (!isValid) {
