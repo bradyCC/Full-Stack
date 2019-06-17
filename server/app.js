@@ -44,7 +44,7 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use((err, req, res, next) => {
-  res.status(500).send({
+  res.status(err.statusCode || 500).send({
     message: err.message
   });
   // set locals, only providing error in development

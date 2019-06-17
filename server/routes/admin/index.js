@@ -6,7 +6,7 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const AdminUser = require('../../models/AdminUser');
 
-const assert = require('http-assert');
+// const assert = require('http-assert');
 
 module.exports = function() {
   // let router = express.Router({
@@ -24,11 +24,19 @@ module.exports = function() {
   router.get('/', async (req, res, next) => {
     // 获取token
     const token = String(req.headers.authorization || '').split(' ').pop();
+    if (!token) {
+      return res.status(401).send({message: '请先登录'});
+    }
     // 解析token返回id
     const { id } = jwt.verify(token, global.secret);
+    if (!id) {
+      return res.status(401).send({message: '请先登录'});
+    }
     // 查询用户表
     req.user = await AdminUser.findById(id);
-
+    if (!req.user) {
+      return res.status(401).send({message: '请先登录'});
+    }
     next()
   }, async (req, res) => {
     const queryOptions = {};
