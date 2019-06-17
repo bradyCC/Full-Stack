@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Main from './views/Main.vue'
+
+// 登录
+import Login from './views/Login'
 // 分类
 import CategoryEdit from './views/CategoryEdit'
 import CategoryList from './views/CategoryList'
@@ -24,6 +27,11 @@ Vue.use(Router)
 
 export default new Router({
   routes: [
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login
+    },
     {
       path: '/',
       name: 'Main',

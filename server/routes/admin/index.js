@@ -2,6 +2,7 @@
  * Created by brady on 2019/6/15.
  */
 const express = require('express');
+const jwt = require('jsonwebtoken');
 
 module.exports = function() {
   // let router = express.Router({
@@ -16,7 +17,11 @@ module.exports = function() {
   });
 
   // 获取列表
-  router.get('/', async (req, res) => {
+  router.get('/', async (req, res, next) => {
+    const token = String(req.headers.authorization || '').split(' ').pop();
+    const tokenData = jwt.verify(token, global.secret);
+    next()
+  }, async (req, res) => {
     const queryOptions = {};
     if (req.Model.modelName === 'Category') {
       queryOptions.populate = 'parent';

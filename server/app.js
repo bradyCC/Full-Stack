@@ -3,18 +3,19 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const cors = require('cors');
+const inflection = require('inflection');
 
 const indexRouter = require('./routes/index');
 const adminRouter = require('./routes/admin/index');
 const uploadRouter = require('./routes/admin/upload');
-
-const cors = require('cors');
-const inflection = require('inflection');
+const loginRouter = require('./routes/admin/login');
 
 const app = express();
 
 app.use(cors());  // 处理跨域
 require('./db')(app); // 链接数据库
+global.secret = 'qwert' // 用于生成token
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -34,6 +35,7 @@ app.use('/admin/api/rest/:resourse', async (req, res, next) => {
     next();
 }, adminRouter());
 app.use('/admin/api/upload', uploadRouter());
+app.use('/admin/api/login', loginRouter());
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
