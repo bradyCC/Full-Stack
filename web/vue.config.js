@@ -3,6 +3,6 @@
  */
 module.exports = {
   devServer: {
-    public: '192.168.1.119:8080'
+    // public: '192.168.1.119:8080'
   }
 }
