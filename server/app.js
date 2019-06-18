@@ -11,6 +11,9 @@ const adminRouter = require('./routes/admin/index');
 const uploadRouter = require('./routes/admin/upload');
 const loginRouter = require('./routes/admin/login');
 
+const jwt = require('jsonwebtoken');
+const AdminUser = require('./models/AdminUser');
+
 const app = express();
 
 app.use(cors());  // 处理跨域
@@ -30,6 +33,19 @@ app.use('/public/upload', express.static(path.join(__dirname, 'public/upload')))
 
 app.use('/', indexRouter);
 app.use('/admin/api/rest/:resourse', async (req, res, next) => {
+  // 获取token
+  const token = String(req.headers.authorization || '').split(' ').pop();
+  if (!token) return next(createError(401, '请先登录'))
+
+  // 解析token返回id
+  const { id } = jwt.verify(token, global.secret);
+  if (!id) return next(createError(401, '请先登录'))
+
+  // 查询用户表
+  req.user = await AdminUser.findById(id);
+  if (!req.user) return next(createError(401, '请先登录'))
+  next()
+}, (req, res, next) => {
     const modelName = inflection.classify(req.params.resourse); // 获取参数大写类名
     req.Model = require(`./models/${modelName}`); // 获取Model模型
     next();
@@ -44,7 +60,7 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use((err, req, res, next) => {
-  res.status(err.statusCode || 500).send({
+  return res.status(err.statusCode || 500).send({
     message: err.message
   });
   // set locals, only providing error in development
@@ -54,6 +70,7 @@ app.use((err, req, res, next) => {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+  next();
 });
 
 module.exports = app;
