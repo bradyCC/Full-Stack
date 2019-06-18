@@ -38,14 +38,13 @@ export default {
     },
     // 保存数据
     async save () {
-      let res
       // 根据ID判断是新建还是编辑
       if (this.id) {
         // 编辑
-        res = await this.$http.put(`rest/admin_users/${this.id}`, this.model)
+        await this.$http.put(`rest/admin_users/${this.id}`, this.model)
       } else {
         // 新建
-        res = await this.$http.post('rest/admin_users', this.model)
+        await this.$http.post('rest/admin_users', this.model)
       }
 
       // 操作提示

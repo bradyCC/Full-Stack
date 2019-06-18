@@ -56,14 +56,11 @@
           <el-dropdown>
             <i class="el-icon-setting" style="margin-right: 15px"></i>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>查看</el-dropdown-item>
-              <el-dropdown-item>新增</el-dropdown-item>
-              <el-dropdown-item>删除</el-dropdown-item>
+              <el-dropdown-item @click.native="logout">退出</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
-          <span>王小虎</span>
+          <span>{{username}}</span>
         </el-header>
-
         <el-main>
           <router-view></router-view>
         </el-main>
@@ -76,13 +73,23 @@
 export default {
   name: 'Main',
   data() {
-    const item = {
-      date: '2016-05-02',
-      name: '王小虎',
-      address: '上海市普陀区金沙江路 1518 弄'
-    }
     return {
-      tableData: Array(20).fill(item)
+      username: ``
+    }
+  },
+  mounted() {
+    this.username = localStorage.username
+  },
+  methods: {
+    // 退出
+    logout () {
+      delete localStorage.token
+      delete localStorage.username
+      this.$message({
+        type: 'success',
+        message: '退出成功',
+      });
+      this.$router.push('/login')
     }
   }
 }

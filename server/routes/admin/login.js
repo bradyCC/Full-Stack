@@ -25,7 +25,7 @@ module.exports = function() {
     // 3.返回token
     const jwt = require('jsonwebtoken');
     const token = jwt.sign({ id: user._id }, req.app.get('secret'));
-    res.send({token})
+    res.send({username, token})
   });
 
   return router;
