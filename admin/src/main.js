@@ -14,3 +14,11 @@ new Vue({
   router,
   render: h => h(App)
 }).$mount('#app')
+
+// 前端路由限制
+router.beforeEach((to, from, next) => {
+  if (!to.meta.isPublic && !localStorage.token) {
+    return next('/login')
+  }
+  next()
+})
