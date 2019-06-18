@@ -2,15 +2,16 @@
  * Created by brady on 2019/6/17.
  */
 const express = require('express');
-const AdminUser = require('../../models/AdminUser');
-
 const createError = require('http-errors');
+const AdminUser = require('../../models/AdminUser');
 
 module.exports = function() {
   let router = express.Router();
 
   router.post('/', async (req, res, next) => {
+
     const { username, password } = req.body;
+
     // 1.验证用户名是否存在
     if (!username) return next(createError(422, '请输入用户名'));
     const user = await AdminUser.findOne({username}).select('+password');
@@ -23,7 +24,7 @@ module.exports = function() {
 
     // 3.返回token
     const jwt = require('jsonwebtoken');
-    const token = jwt.sign({ id: user._id }, global.secret);
+    const token = jwt.sign({ id: user._id }, req.app.get('secret'));
     res.send({token})
   });
 

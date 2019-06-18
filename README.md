@@ -43,7 +43,7 @@
 
 17.登录接口（jwt, jsonwebtoken）
 
-18.服务端登录校验
+18.服务端登录校验（中间件封装）
 
 19.客户端路由限制（beforeEach, meta）
 

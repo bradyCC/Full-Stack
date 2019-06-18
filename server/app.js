@@ -3,22 +3,21 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const cors = require('cors');
-const inflection = require('inflection');
 
+const cors = require('cors'); // 处理跨域
+
+// 定义路由
 const indexRouter = require('./routes/index');
 const adminRouter = require('./routes/admin/index');
 const uploadRouter = require('./routes/admin/upload');
 const loginRouter = require('./routes/admin/login');
 
-const jwt = require('jsonwebtoken');
-const AdminUser = require('./models/AdminUser');
-
 const app = express();
 
 app.use(cors());  // 处理跨域
 require('./db')(app); // 链接数据库
-global.secret = 'qwert' // 用于生成token
+// global.secret = 'qwert'
+app.set('secret', 'qwert'); // 用于生成token
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -31,26 +30,19 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/public/upload', express.static(path.join(__dirname, 'public/upload')));
 
+// 登录校验中间件
+const authMiddleware = require('./middleware/auth');
+
+// 资源中间件
+const resourceMiddleware = require('./middleware/resource')
+
+// 前端路由
 app.use('/', indexRouter);
-app.use('/admin/api/rest/:resourse', async (req, res, next) => {
-  // 获取token
-  const token = String(req.headers.authorization || '').split(' ').pop();
-  if (!token) return next(createError(401, '请先登录'))
-
-  // 解析token返回id
-  const { id } = jwt.verify(token, global.secret);
-  if (!id) return next(createError(401, '请先登录'))
-
-  // 查询用户表
-  req.user = await AdminUser.findById(id);
-  if (!req.user) return next(createError(401, '请先登录'))
-  next()
-}, (req, res, next) => {
-    const modelName = inflection.classify(req.params.resourse); // 获取参数大写类名
-    req.Model = require(`./models/${modelName}`); // 获取Model模型
-    next();
-}, adminRouter());
-app.use('/admin/api/upload', uploadRouter());
+// 管理后台路由
+app.use('/admin/api/rest/:resourse', authMiddleware(), resourceMiddleware(), adminRouter());
+// 文件上传路由
+app.use('/admin/api/upload', authMiddleware(), uploadRouter());
+// 登录路由
 app.use('/admin/api/login', loginRouter());
 
 // catch 404 and forward to error handler
