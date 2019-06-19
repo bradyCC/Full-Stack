@@ -1,6 +1,5 @@
 <template>
   <div class="">
-    <!-- start of swiper -->
     <swiper :options="swiperOption" ref="mySwiper">
       <!-- slides -->
       <swiper-slide>
@@ -33,7 +32,9 @@
         <span>收起</span>
       </div>
     </div>
+    <!-- end of nav-icons -->
 
+    <i class="iconfont icon-Menu"></i>
   </div>
 </template>
 
