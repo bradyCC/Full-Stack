@@ -432,11 +432,18 @@ a {
   font-size: 0.923rem;
   padding: .3rem .6rem; }
 
-.nav .nav-item {
-  border-bottom: 3px solid transparent;
-  padding-bottom: .2rem; }
-  .nav .nav-item.active {
-    border-bottom: 3px solid #fff; }
+.nav {
+  display: flex; }
+  .nav .nav-item {
+    border-bottom: 3px solid transparent;
+    padding-bottom: .2rem; }
+    .nav .nav-item.active {
+      color: #db9e3f;
+      border-bottom-color: #db9e3f; }
+  .nav.nav-inverse .nav-item {
+    color: #fff; }
+    .nav.nav-inverse .nav-item.active {
+      border-bottom-color: #fff; }
 
 .sprite {
   background: url(../images/icon.png) no-repeat 0 0;

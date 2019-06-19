@@ -34,7 +34,44 @@
     </div>
     <!-- end of nav-icons -->
 
-    <i class="iconfont icon-Menu"></i>
+    <MyCard icon="Menu" title="新闻资讯">
+      <div class="nav jc-between">
+        <div class="nav-item active">
+          <div class="nav-link">热门</div>
+        </div>
+        <div class="nav-item">
+          <div class="nav-link">新闻</div>
+        </div>
+        <div class="nav-item">
+          <div class="nav-link">公告</div>
+        </div>
+        <div class="nav-item">
+          <div class="nav-link">活动</div>
+        </div>
+        <div class="nav-item">
+          <div class="nav-link">赛事</div>
+        </div>
+      </div>
+      <div class="pt-3">
+        <swiper>
+          <swiper-slide v-for="m in 5" :key="m">
+            <div class="py-2" v-for="n in 5" :key="n">
+              <span>[新闻]</span>
+              <span>|</span>
+              <span>新版本爆料①丨S16赛季王者峡谷最新调整</span>
+              <span>06/19</span>
+            </div>
+          </swiper-slide>
+        </swiper>
+      </div>
+    </MyCard>
+
+    <MyCard icon="card-hero" title="英雄列表"></MyCard>
+
+    <MyCard icon="video-" title="精彩视频"></MyCard>
+
+    <MyCard icon="text1" title="图文攻略"></MyCard>
+
   </div>
 </template>
 
