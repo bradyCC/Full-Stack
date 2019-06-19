@@ -8,6 +8,8 @@ $colors: (
 
   "light": #f9f9f9,
 
+  "light-d4d9de": #d4d9de,
+
   "grey-666": #666,
 
   "grey-999": #999,
@@ -18,6 +20,9 @@ $colors: (
 
   "black": #000,
 );
+
+// border
+$border-color: map-get($colors, 'light-d4d9de');
 
 // font-size
 $base-font-size: 1rem;
