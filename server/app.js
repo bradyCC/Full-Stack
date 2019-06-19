@@ -37,7 +37,7 @@ const authMiddleware = require('./middleware/auth');
 const resourceMiddleware = require('./middleware/resource')
 
 // 前端路由
-app.use('/', indexRouter);
+app.use('/index/api', indexRouter());
 // 管理后台路由
 app.use('/admin/api/rest/:resourse', authMiddleware(), resourceMiddleware(), adminRouter());
 // 文件上传路由

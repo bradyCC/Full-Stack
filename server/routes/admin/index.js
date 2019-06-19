@@ -3,11 +3,11 @@
  */
 const express = require('express');
 
-module.exports = function() {
+module.exports = () => {
   // let router = express.Router({
     // mergeParams: true // 合并参数，用于获取URL参数
   // });
-  let router = express.Router();
+  const router = express.Router();
 
   // 创建
   router.post('/', async (req, res) => {

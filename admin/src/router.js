@@ -33,29 +33,29 @@ export default new Router({
       name: 'Main',
       component: Main,
       children: [
-        { path: '/categories/create', name: 'CategoryEdit', component: CategoryEdit }, // 创建分类
-        { path: '/categories/edit/:id', name: 'CategoryEdit', component: CategoryEdit, props: true }, // 编辑分类
-        { path: '/categories/list', name: 'CategoryList', component: CategoryList }, // 分类列表
+        { path: '/categories/create', component: CategoryEdit }, // 创建分类
+        { path: '/categories/edit/:id', component: CategoryEdit, props: true }, // 编辑分类
+        { path: '/categories/list', component: CategoryList }, // 分类列表
 
-        { path: '/items/create', name: 'ItemEdit', component: ItemEdit }, // 创建物品
-        { path: '/items/edit/:id', name: 'ItemEdit', component: ItemEdit, props: true }, // 编辑物品
-        { path: '/items/list', name: 'ItemList', component: ItemList }, // 物品列表
+        { path: '/items/create', component: ItemEdit }, // 创建物品
+        { path: '/items/edit/:id', component: ItemEdit, props: true }, // 编辑物品
+        { path: '/items/list', component: ItemList }, // 物品列表
 
-        { path: '/heros/create', name: 'HeroEdit', component: HeroEdit }, // 创建英雄
-        { path: '/heros/edit/:id', name: 'HeroEdit', component: HeroEdit, props: true }, // 编辑英雄
-        { path: '/heros/list', name: 'HeroList', component: HeroList }, // 英雄列表
+        { path: '/heros/create', component: HeroEdit }, // 创建英雄
+        { path: '/heros/edit/:id', component: HeroEdit, props: true }, // 编辑英雄
+        { path: '/heros/list', component: HeroList }, // 英雄列表
 
-        { path: '/articles/create', name: 'ArticleEdit', component: ArticleEdit }, // 创建文章
-        { path: '/articles/edit/:id', name: 'ArticleEdit', component: ArticleEdit, props: true }, // 编辑文章
-        { path: '/articles/list', name: 'ArticleList', component: ArticleList }, // 文章列表
+        { path: '/articles/create', component: ArticleEdit }, // 创建文章
+        { path: '/articles/edit/:id', component: ArticleEdit, props: true }, // 编辑文章
+        { path: '/articles/list', component: ArticleList }, // 文章列表
 
-        { path: '/ads/create', name: 'AdEdit', component: AdEdit }, // 创建广告位
-        { path: '/ads/edit/:id', name: 'AdEdit', component: AdEdit, props: true }, // 编辑广告位
-        { path: '/ads/list', name: 'AdList', component: AdList }, // 广告位列表
+        { path: '/ads/create', component: AdEdit }, // 创建广告位
+        { path: '/ads/edit/:id', component: AdEdit, props: true }, // 编辑广告位
+        { path: '/ads/list', component: AdList }, // 广告位列表
 
-        { path: '/admin_users/create', name: 'AdminUserEdit', component: AdminUserEdit }, // 创建管理员
-        { path: '/admin_users/edit/:id', name: 'AdminUserEdit', component: AdminUserEdit, props: true }, // 编辑管理员
-        { path: '/admin_users/list', name: 'AdminUserList', component: AdminUserList }, // 管理员列表
+        { path: '/admin_users/create', component: AdminUserEdit }, // 创建管理员
+        { path: '/admin_users/edit/:id', component: AdminUserEdit, props: true }, // 编辑管理员
+        { path: '/admin_users/list', component: AdminUserList }, // 管理员列表
       ]
     },
     // {

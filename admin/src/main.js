@@ -26,11 +26,6 @@ Vue.mixin({
   }
 })
 
-new Vue({
-  router,
-  render: h => h(App)
-}).$mount('#app')
-
 // 前端路由限制
 router.beforeEach((to, from, next) => {
   if (!to.meta.isPublic && !localStorage.token) {
@@ -38,3 +33,10 @@ router.beforeEach((to, from, next) => {
   }
   next()
 })
+
+new Vue({
+  router,
+  render: h => h(App)
+}).$mount('#app')
+
+
