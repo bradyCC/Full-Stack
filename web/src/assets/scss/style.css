@@ -21,6 +21,12 @@ a {
 .bg-primary {
   background-color: #db9e3f; }
 
+.text-info {
+  color: #4b67af; }
+
+.bg-info {
+  background-color: #4b67af; }
+
 .text-white {
   color: #fff; }
 
@@ -64,13 +70,13 @@ a {
   background-color: #000; }
 
 .text-left {
-  text-align: left; }
+  text-align: left !important; }
 
 .text-center {
-  text-align: center; }
+  text-align: center !important; }
 
 .text-right {
-  text-align: right; }
+  text-align: right !important; }
 
 .fs-xxs {
   font-size: 0.615rem; }
@@ -89,6 +95,12 @@ a {
 
 .fs-xl {
   font-size: 1.231rem; }
+
+.w-100 {
+  width: 100%; }
+
+.h-100 {
+  height: 100%; }
 
 .d-flex {
   display: flex; }
