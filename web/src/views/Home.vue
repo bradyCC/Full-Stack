@@ -37,11 +37,11 @@
     <MyCardList icon="Menu" title="新闻资讯" :categories="newsCats">
       <!-- 具名插槽 -->
       <template #items="{category}">
-        <div class="py-2" v-for="(news, index) in category.newsList" :key="index">
-          <span>[{{news.categoryName}}]</span>
-          <span>|</span>
-          <span>{{news.title}}</span>
-          <span>{{news.date}}</span>
+        <div class="py-2 fs-lg d-flex" v-for="(news, index) in category.newsList" :key="index">
+          <span class="text-info">[{{news.categoryName}}]</span>
+          <span class="px-2">|</span>
+          <span class="d-flex-1 text-grey-666 text-ellipsis pr-2">{{news.title}}</span>
+          <span class="text-grey-999 fs-sm">{{news.createdAt | dateFilter}}</span>
         </div>
       </template>
     </MyCardList>
@@ -53,6 +53,8 @@
 </template>
 
 <script>
+import dayjs from 'dayjs'
+
 export default {
   name: 'Home',
   data () {
@@ -82,48 +84,7 @@ export default {
         //   console.log(swiper)
         // }
       },
-      newsCats: [
-        {
-          name: '热门',
-          newsList: new Array(5).fill({}).map(() => ({
-            categoryName: '公告',
-            title: '6月19日全服不停机更新公告',
-            date: '06/19',
-          })),
-        },
-        {
-          name: '新闻',
-          newsList: new Array(5).fill({}).map(() => ({
-            categoryName: '新闻',
-            title: '6月19日全服不停机更新公告',
-            date: '06/19',
-          })),
-        },
-        {
-          name: '公告',
-          newsList: new Array(5).fill({}).map(() => ({
-            categoryName: '公告',
-            title: '6月19日全服不停机更新公告',
-            date: '06/19',
-          })),
-        },
-        {
-          name: '活动',
-          newsList: new Array(5).fill({}).map(() => ({
-            categoryName: '活动',
-            title: '6月19日全服不停机更新公告',
-            date: '06/19',
-          })),
-        },
-        {
-          name: '赛事',
-          newsList: new Array(5).fill({}).map(() => ({
-            categoryName: '赛事',
-            title: '6月19日全服不停机更新公告',
-            date: '06/19',
-          })),
-        },
-      ],
+      newsCats: [],
     }
   },
   computed: {
@@ -136,7 +97,22 @@ export default {
     // 然后你就可以使用当前上下文内的swiper对象去做你想做的事了
     // console.log('this is current swiper instance object', this.swiper)
     // this.swiper.slideTo(3, 1000, false)
-  }
+
+    this.fetchNewsCats()
+  },
+  methods: {
+    // 获取新闻资讯列表
+    async fetchNewsCats () {
+      const res = await this.$http.get('news/list')
+      this.newsCats = res.data
+    },
+  },
+  filters: {
+    // 日期时间格式化
+    dateFilter (val) {
+      return dayjs(val).format('MM/DD')
+    }
+  },
 }
 </script>
 

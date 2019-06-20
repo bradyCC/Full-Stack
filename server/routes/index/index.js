@@ -105,9 +105,6 @@ module.exports = () => {
     res.send(cats);
   });
 
-
-
-
   return router;
 }
 

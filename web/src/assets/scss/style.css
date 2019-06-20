@@ -102,6 +102,12 @@ a {
 .fs-xl {
   font-size: 1.231rem; }
 
+.text-ellipsis {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; }
+
 .w-100 {
   width: 100%; }
 
