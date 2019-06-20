@@ -15,8 +15,8 @@
 export default {
   name: 'Card',
   props: {
-    title: { type: String, required: true },
     icon: { type: String, required: true },
+    title: { type: String, required: true },
   },
   data () {
     return {

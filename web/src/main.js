@@ -12,7 +12,9 @@ import 'swiper/dist/css/swiper.css'
 Vue.use(VueAwesomeSwiper, /* { default global options } */)
 
 import Card from './components/Card'
-Vue.component('MyCard', Card)
+Vue.component('MyCard', Card, )
+import CardList from './components/CardList'
+Vue.component('MyCardList', CardList)
 
 
 new Vue({
