@@ -71,6 +71,8 @@
 10.列表卡片组件（list-card, nav, swiper）
 
 11.首页新闻资讯
++ $$('')在控制台中获取所有新闻标题，例：$$('.news_list .title').map(el => el.innerHTML)
++ npm i require-all 引入文件夹中的所有文件
 
 12.首页英雄列表
 

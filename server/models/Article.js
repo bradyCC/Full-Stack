@@ -7,6 +7,8 @@ const schema = new mongoose.Schema({
   categories: [{ type: mongoose.SchemaTypes.ObjectId, ref: 'Category' }], // 所属分类，关联
   title: { type: String }, // 标题
   body: { type: String }, // 详情
+}, {
+  timestamps: true // 自动设置时间戳
 })
 
 module.exports = mongoose.model('Article', schema);

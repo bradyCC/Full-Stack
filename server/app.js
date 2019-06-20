@@ -15,7 +15,7 @@ const loginRouter = require('./routes/admin/login');
 const app = express();
 
 app.use(cors());  // 处理跨域
-require('./db')(app); // 链接数据库
+require('./plugins/db')(app); // 链接数据库
 // global.secret = 'qwert'
 app.set('secret', 'qwert'); // 用于生成token
 
@@ -37,7 +37,7 @@ const authMiddleware = require('./middleware/auth');
 const resourceMiddleware = require('./middleware/resource')
 
 // 前端路由
-app.use('/index/api', indexRouter());
+app.use('/web/api', indexRouter());
 // 管理后台路由
 app.use('/admin/api/rest/:resourse', authMiddleware(), resourceMiddleware(), adminRouter());
 // 文件上传路由
