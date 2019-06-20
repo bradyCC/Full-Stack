@@ -11,6 +11,6 @@ const schema = new mongoose.Schema({
       url: { type: String }, // url
     }
   ]
-})
+});
 
 module.exports = mongoose.model('Ad', schema);

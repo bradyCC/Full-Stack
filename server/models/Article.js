@@ -9,6 +9,6 @@ const schema = new mongoose.Schema({
   body: { type: String }, // 详情
 }, {
   timestamps: true // 自动设置时间戳
-})
+});
 
 module.exports = mongoose.model('Article', schema);

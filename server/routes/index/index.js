@@ -18,12 +18,12 @@ module.exports = () => {
   const Article = mongoose.model('Article');
   // const Article = require('../../models/Article');
 
-  // 新闻初始化
+  // 新闻资讯初始化
   router.get('/news/init', async (req, res) => {
     // 获取指定上级分类
     const parent = await Category.findOne({
       name: '新闻资讯',
-    })
+    });
 
     // 获取指定上级分类下所有小分类
     const cats = await Category.find().where({
@@ -46,6 +46,63 @@ module.exports = () => {
     // 批量插入数据
     await Article.insertMany(newsList);
     res.send(newsList)
+  });
+
+  // 获取新闻资讯列表
+  router.get('/news/list', async (req, res) => {
+    // 获取列表 populate关联查询
+    // const list = await Category.findOne({
+    //   name: '新闻资讯',
+    // }).populate({
+    //   path: 'children',
+    //   populate: {
+    //     path: 'newsList',
+    //   }
+    // }).lean();
+    // res.send(list);
+
+    // 获取指定上级分类
+    const parent = await Category.findOne({
+        name: '新闻资讯',
+    });
+    // 聚合查询
+    const cats = await Category.aggregate([
+      // 设置查询条件
+      { $match: { parent: parent._id } }, // match查询
+      {
+        $lookup: {
+          from: 'articles', // 集合名称，模型中未设置默认是模型名复数小写
+          localField: '_id', // 键
+          foreignField: 'categories', // 关联键
+          as: 'newsList', // 命名
+        }
+      }, // lookup查询
+      {
+        $addFields: {
+          newsList: { $slice: ['$newsList', 5] } // 每个newsList返回5条数据
+        }
+      }, // addFields添加/修改字段
+    ]);
+
+    // 获取子分类id
+    const subCats = cats.map(category => category._id);
+    // 添加热门分类
+    cats.unshift({
+      name: '热门',
+      newsList: await Article.find().where({
+        categories: { $in: subCats }
+      }).populate('categories').limit(5).lean(),
+    });
+
+    // 处理categoryName
+    cats.map(cat => {
+      cat.newsList.map(news => {
+        news.categoryName = cat.name == '热门'? news.categories[0].name :cat.name;
+        return news;
+      });
+      return cat;
+    });
+    res.send(cats);
   });
 
 

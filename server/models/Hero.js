@@ -33,6 +33,6 @@ const schema = new mongoose.Schema({
       description: { type: String },  // 描述
     }
   ],
-})
+});
 
 module.exports = mongoose.model('Hero', schema);

@@ -12,6 +12,6 @@ const schema = new mongoose.Schema({
       return require('bcrypt').hashSync(val, 10); // 散列模式
     }
   },
-})
+});
 
 module.exports = mongoose.model('AdminUser', schema);
