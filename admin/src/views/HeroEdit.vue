@@ -167,12 +167,12 @@ export default {
       this.$router.push('/heros/list')
     },
   },
-  watch: {
-    // 监听ID
-    id () {
-      this.model = {}
-    }
-  }
+  // watch: {
+  //   // 监听ID
+  //   id () {
+  //     this.model = {}
+  //   }
+  // }
 }
 </script>
 

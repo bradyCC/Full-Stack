@@ -56,12 +56,12 @@ export default {
       this.$router.push('/admin_users/list')
     },
   },
-  watch: {
-    // 监听ID
-    id () {
-      this.model = {}
-    }
-  }
+  // watch: {
+  //   // 监听ID
+  //   id () {
+  //     this.model = {}
+  //   }
+  // }
 }
 </script>
 
