@@ -46,7 +46,18 @@
       </template>
     </MyCardList>
 
-    <MyCard icon="card-hero" title="英雄列表"></MyCard>
+    <MyCardList icon="card-hero" title="英雄列表" :categories="heroCats">
+      <!-- 具名插槽 -->
+      <template #items="{category}">
+        <div class="d-flex d-flex-wrap" style="margin: 0 -.5rem;">
+          <div class="p-2 text-center" style="width: 20%;" v-for="(heroes, index) in category.heroList" :key="index">
+            <img :src="heroes.avatar" alt="" class="w-100">
+            <div>{{heroes.name}}</div>
+          </div>
+        </div>
+      </template>
+    </MyCardList>
+
     <MyCard icon="video-" title="精彩视频"></MyCard>
     <MyCard icon="text1" title="图文攻略"></MyCard>
   </div>
@@ -84,7 +95,8 @@ export default {
         //   console.log(swiper)
         // }
       },
-      newsCats: [],
+      newsCats: [], // 新闻资讯数据
+      heroCats: [], // 英雄列表数据
     }
   },
   computed: {
@@ -99,6 +111,7 @@ export default {
     // this.swiper.slideTo(3, 1000, false)
 
     this.fetchNewsCats()
+    this.fetchHeroCats()
   },
   methods: {
     // 获取新闻资讯列表
@@ -106,6 +119,11 @@ export default {
       const res = await this.$http.get('news/list')
       this.newsCats = res.data
     },
+    // 获取英雄列表
+    async fetchHeroCats () {
+      const res = await this.$http.get('heroes/list')
+      this.heroCats = res.data
+    }
   },
   filters: {
     // 日期时间格式化

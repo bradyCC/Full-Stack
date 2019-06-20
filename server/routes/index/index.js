@@ -138,6 +138,37 @@ module.exports = () => {
   });
 
   // 获取英雄列表
+  router.get('/heroes/list', async (req, res) => {
+    // 获取指定上级分类
+    const parent = await Category.findOne({
+      name: '英雄列表',
+    });
+    // 聚合查询
+    const cats = await Category.aggregate([
+      // 设置查询条件
+      { $match: { parent: parent._id } }, // match查询
+      {
+        $lookup: {
+          from: 'heroes', // 集合名称，模型中未设置默认是模型名复数小写
+          localField: '_id', // 键
+          foreignField: 'categories', // 关联键
+          as: 'heroList', // 命名
+        }
+      }, // lookup查询
+    ]);
+
+    // 获取子分类id
+    const subCats = cats.map(category => category._id);
+    // 添加热门分类
+    cats.unshift({
+      name: '热门',
+      heroList: await Hero.find().where({
+        categories: { $in: subCats }
+      }).limit(10).lean(),
+    });
+
+    res.send(cats);
+  });
 
   return router;
 }
