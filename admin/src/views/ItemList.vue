@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <h1>物品列表</h1>
-    <el-table :data="items">
+    <el-table :data="dataList">
       <el-table-column prop="_id" label="ID" width="220"></el-table-column>
       <el-table-column prop="name" label="名称"></el-table-column>
       <el-table-column prop="icon" label="图标">

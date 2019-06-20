@@ -70,16 +70,43 @@
 
 10.列表卡片组件（list-card, nav, swiper）
 
-11.首页新闻资讯
-+ $$('')在控制台中获取所有新闻标题，例：$$('.news_list .title').map(el => el.innerHTML)
+11.首页新闻资讯 - 数据导入
++ $$('')在浏览器控制台中获取所有新闻标题
+```javascript
+//例：
+$$('.news_list .title').map(el => el.innerHTML)
+```
 + npm i require-all 引入文件夹中的所有文件
 + npm i dayjs 日期时间格式化
 
-12.首页英雄列表
+12.首页新闻资讯 - 获取数据接口
 
-13.新闻详情页
+13.首页新闻资讯 - 前端数据渲染 
 
-14.英雄详情页
+14.首页英雄列表 - 数据导入
++ $$('')在浏览器控制台中获取所有英雄分类、头像、名称
+```javascript
+// 例：
+JSON.stringify($$('.hero-nav > li').map((li, index) => {
+  return {
+    name: li.innerText,
+		heroes: $$('li', $$('.hero-list')[index]).map(el => {
+		  return {
+			name: $$('h3', el)[0].innerHTML,
+			avatar: $$('img', el)[0].src,
+	      }	
+	    })
+  }
+}))
+```
+
+15.首页英雄列表 - 获取数据接口
+
+16.首页英雄列表 - 前端数据渲染
+
+17.新闻详情页
+
+18.英雄详情页
 
 ## 五、项目地址
 GitHub: [Full-Stack](https://github.com/bradyCC/Full-Stack)
