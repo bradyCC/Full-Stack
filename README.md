@@ -111,7 +111,71 @@ JSON.stringify($$('.hero-nav > li').map((li, index) => {
 ## 五、项目地址
 GitHub: [Full-Stack](https://github.com/bradyCC/Full-Stack)
 
-## 六、相关资料
+## 六、模块
+1.lodash
+```javascript
+// 安装
+npm i lodash --save
+
+// 引入
+const _ = require('lodash')
+
+// 用法：
+const obj = {'a': [{ 'b': { 'c': '0'} }] };
+_.get(obj, 'a[0].b.c')   // 0
+_.get(obj, 'a[0].d.c') // undefined
+_.get(obj, 'a[0].d.c', null) // null
+```
+
+2.axios
+```javascript
+// 安装 
+npm i axios
+
+// 引入 
+const axios = require('axios')
+
+// 用法：
+const http = axios.create({ baseURL: 'https://api/github.com/' })
+http.get('repos/vuejs/vue').then((res) => {}) 
+
+// 处理token
+http.interceptors.request.use(function (config) {
+  // Do something before request is sent
+  config.headers.Authorization = token
+  return config;
+}, function (error) {
+  // Do something with request error
+  return Promise.reject(error);
+});
+```
+
+3.inflection
+```javascript
+// 安装 
+npm i inflection
+
+// 引入 
+const inflection = require('inflection')
+
+// 用法：
+inflection.classify('users') // User
+````
+
+4.dayjs
+```javascript
+// 安装 
+npm i dayjs
+
+// 引入 
+const dayjs = require('dayjs')
+
+// 用法：
+dayjs().add(1, 'day').format('YYYY-MM-DD HH:mm:ss') // 2019-06-22 17:09:00
+dayjs().startOf('day').format('YYYY-MM-DD HH:mm:ss') // 2019-06-21 00:00:00
+```
+
+## 七、相关资料
 [Vue](https://cn.vuejs.org)<br/>
 [VueRouter](https://router.vuejs.org/)<br/>
 [ElementUi](https://element.eleme.cn/)<br/>
