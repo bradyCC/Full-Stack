@@ -10,7 +10,7 @@ Vue.config.productionTip = false
 import http from './http'
 Vue.prototype.$http = http
 
-// 全局第一
+// 全局定义
 Vue.mixin({
   computed: {
     uploadUrl () {

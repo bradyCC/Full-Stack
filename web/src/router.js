@@ -3,6 +3,7 @@ import Router from 'vue-router'
 
 import Main from './views/Main'
 import Home from './views/Home'
+import Article from './views/Article'
 
 Vue.use(Router)
 
@@ -13,7 +14,8 @@ export default new Router({
       // name: 'Main',
       component: Main,
       children: [
-        { path: '/', component: Home }
+        { path: '/', name: 'Home', component: Home },
+        { path: '/articles/:id', name:'Article', component: Article, props: true }
       ]
     },
     // {

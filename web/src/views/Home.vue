@@ -37,12 +37,12 @@
     <MyCardList icon="Menu" title="新闻资讯" :categories="newsCats">
       <!-- 具名插槽 -->
       <template #items="{category}">
-        <div class="py-2 fs-lg d-flex" v-for="(news, index) in category.newsList" :key="index">
+        <router-link :to="`/articles/${news._id}`" tag="div" class="py-2 fs-lg d-flex" v-for="(news, index) in category.newsList" :key="index">
           <span class="text-info">[{{news.categoryName}}]</span>
           <span class="px-2">|</span>
           <span class="d-flex-1 text-grey-666 text-ellipsis pr-2">{{news.title}}</span>
           <span class="text-grey-999 fs-sm">{{news.createdAt | dateFilter}}</span>
-        </div>
+        </router-link>
       </template>
     </MyCardList>
 

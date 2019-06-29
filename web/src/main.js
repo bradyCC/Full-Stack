@@ -22,6 +22,10 @@ Vue.prototype.$http = axios.create({
   baseURL: 'http://localhost:3000/web/api/'
 })
 
+router.afterEach((to, from, next) => {
+  window.scroll(0, 0)
+});
+
 new Vue({
   router,
   render: h => h(App)

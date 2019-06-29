@@ -107,7 +107,6 @@ module.exports = () => {
     res.send(cats);
   });
 
-
   // 英雄列表初始化
   router.get('/heroes/init', async (req, res) => {
     // 英雄列表基础数据
@@ -168,6 +167,17 @@ module.exports = () => {
     });
 
     res.send(cats);
+  });
+
+  // 获取文章详情
+  router.get('/articles/:id', async (req, res) => {
+    // 详情数据
+    const detail = await Article.findById(req.params.id).lean();
+    detail.related = await Article.find().where({
+      categories: { $in: detail.categories }
+    }).limit(2);
+
+    res.send(detail)
   });
 
   return router;
