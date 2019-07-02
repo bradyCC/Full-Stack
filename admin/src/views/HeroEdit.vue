@@ -2,14 +2,20 @@
   <div class="">
     <h1>{{ id? '编辑': '新建' }}英雄</h1>
     <el-form label-width="120px" @submit.native.prevent="save">
-      <el-tabs type="border-card">
-        <el-tab-pane label="基本信息">
+      <el-tabs value="basic" type="border-card">
+        <el-tab-pane label="基本信息" name="basic">
           <el-form-item label="名称">
             <el-input v-model="model.name"></el-input>
           </el-form-item>
           <el-form-item label="头像">
-            <el-upload class="avatar-uploader" :action="uploadUrl" :headers="getAuthHeaders()" :show-file-list="false" :on-success="afterUpload">
+            <el-upload class="avatar-uploader" :action="uploadUrl" :headers="getAuthHeaders()" :show-file-list="false" :on-success="res => $set(model, 'avatar', res.url)">
               <img v-if="model.avatar" :src="model.avatar" class="avatar">
+              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+            </el-upload>
+          </el-form-item>
+          <el-form-item label="banner">
+            <el-upload class="avatar-uploader" :action="uploadUrl" :headers="getAuthHeaders()" :show-file-list="false" :on-success="res => $set(model, 'banner', res.url)">
+              <img v-if="model.banner" :src="model.banner" class="avatar">
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
           </el-form-item>
@@ -66,6 +72,12 @@
                   <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                 </el-upload>
               </el-form-item>
+              <el-form-item label="冷却值">
+                <el-input v-model="item.delay"></el-input>
+              </el-form-item>
+              <el-form-item label="消耗">
+                <el-input v-model="item.cost"></el-input>
+              </el-form-item>
               <el-form-item label="描述">
                 <el-input type="textarea" v-model="item.description"></el-input>
               </el-form-item>
@@ -74,6 +86,24 @@
               </el-form-item>
               <el-form-item>
                 <el-button size="small" type="danger" @click="model.skills.splice(index, 1)">删除</el-button>
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </el-tab-pane>
+        <el-tab-pane label="英雄关系" name="partners">
+          <el-button size="small" @click="model.partners.push({})"><i class="el-icon-plus"></i> 添加英雄</el-button>
+          <el-row type="flex" style="flex-wrap: wrap;">
+            <el-col :md="12" v-for="(item, index) in model.partners" :key="index">
+              <el-form-item label="英雄">
+                <el-select filterable v-model="item.hero">
+                  <el-option v-for="hero in heroes" :key="hero._id" :value="hero._id" :label="hero.name"></el-option>
+                </el-select>
+              </el-form-item>
+              <el-form-item label="描述">
+                <el-input type="textarea" v-model="item.description"></el-input>
+              </el-form-item>
+              <el-form-item>
+                <el-button size="small" type="danger" @click="model.partners.splice(index, 1)">删除</el-button>
               </el-form-item>
             </el-col>
           </el-row>
@@ -96,9 +126,11 @@ export default {
     return {
       categories: [], // 类型基础数据
       items: [], // 装备基础数据
+      heros: [], // 英雄基础数据
       model: {
         name: ``,
         avatar: ``,
+        banner: ``,
         title: ``,
         categories: ``,
         scores: {
@@ -107,45 +139,53 @@ export default {
           attack: 0,
           survive: 0,
         },
+        skills: [],
         items1: [],
         items2: [],
         usageTips: ``,
         battleTips: ``,
         teamTips: ``,
-        skills: [],
+        partners: [],
       }, // 英雄
     }
   },
   mounted () {
     // 获取类型基础数据
-    this.fetchCategories();
+    this.fetchCategories()
     // 获取装备基础数据
-    this.fetchItems();
+    this.fetchItems()
+    // 获取英雄基础数据
+    this.fetchHeroes()
     // 如果ID存在，即为编辑，获取数据赋值
     this.id && this.fetch()
   },
   methods: {
     // 上传图片回显
-    afterUpload (res) {
+    // afterUpload (res) {
       // 显式赋值
       // this.$set(this.model, 'avatar', res.url)
-      this.model.avatar = res.url
-    },
+      // this.model.avatar = res.url
+    // },
     // 数据回显
     async fetch () {
       let res = await this.$http.get(`rest/heros/${this.id}`)
       // this.model = res.data
       this.model = Object.assign({}, this.model, res.data)
     },
-    // 获取类型
+    // 获取类型基础数据
     async fetchCategories () {
       let res = await this.$http.get('rest/categories')
       this.categories = res.data
     },
-    // 获取类型
+    // 获取装备基础数据
     async fetchItems () {
       let res = await this.$http.get('rest/items')
       this.items = res.data
+    },
+    // 获取英雄基础数据
+    async fetchHeroes () {
+      let res = await this.$http.get('rest/heroes')
+      this.heroes = res.data
     },
     // 保存数据
     async save () {

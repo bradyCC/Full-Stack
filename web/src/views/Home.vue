@@ -50,10 +50,10 @@
       <!-- 具名插槽 -->
       <template #items="{category}">
         <div class="d-flex d-flex-wrap" style="margin: 0 -.5rem;">
-          <div class="p-2 text-center" style="width: 20%;" v-for="(heroes, index) in category.heroList" :key="index">
+          <router-link :to="`/heroes/${heroes._id}`" tag="div" class="p-2 text-center" style="width: 20%;" v-for="(heroes, index) in category.heroList" :key="index">
             <img :src="heroes.avatar" alt="" class="w-100">
             <div>{{heroes.name}}</div>
-          </div>
+          </router-link>
         </div>
       </template>
     </MyCardList>

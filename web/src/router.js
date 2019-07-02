@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import Main from './views/Main'
 import Home from './views/Home'
 import Article from './views/Article'
+import Hero from './views/Hero'
 
 Vue.use(Router)
 
@@ -15,8 +16,14 @@ export default new Router({
       component: Main,
       children: [
         { path: '/', name: 'Home', component: Home },
-        { path: '/articles/:id', name:'Article', component: Article, props: true }
+        { path: '/articles/:id', name:'Article', component: Article, props: true },
       ]
+    },
+    {
+      path: '/heroes/:id',
+      name:' Hero',
+      component: Hero,
+      props: true
     },
     // {
     //   path: '/about',

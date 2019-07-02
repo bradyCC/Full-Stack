@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const schema = new mongoose.Schema({
   name: { type: String }, // 名称
   avatar: { type: String }, // 头像
+  banner: { type: String }, // banner
   title: { type: String },  // 称号
   categories: [{ type: mongoose.SchemaTypes.ObjectId, ref: 'Category' }], // 职业，关联
   scores: {
@@ -18,6 +19,8 @@ const schema = new mongoose.Schema({
     {
       icon: { type: String }, // 图标
       name: { type: String }, // 名称
+      delay: { type: String }, // 冷却值
+      cost: { type: String }, // 消耗
       description: { type: String },  // 描述
       tips: { type: String }, // 提示
     }

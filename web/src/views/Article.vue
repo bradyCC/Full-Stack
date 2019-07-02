@@ -2,7 +2,7 @@
   <div class="page-article" v-if="model">
     <!-- 标题 -->
     <div class="d-flex py-3 px-2 border-bottom">
-      <div class="iconfont icon-back01-copy text-blur"></div>
+      <div class="iconfont icon-back01-copy text-blur" @click="goBack"></div>
       <strong class="d-flex-1 text-ellipsis px-2 text-blur">{{ model.title }}</strong>
       <div class="text-grey-666 fs-xs">2019-06-29</div>
     </div>
@@ -40,6 +40,10 @@ export default {
     async fetchArticle () {
       const res = await this.$http.get(`articles/${this.id}`)
       this.model = res.data
+    },
+    // 返回
+    goBack () {
+      this.$router.go(-1)
     }
   },
   watch: {
