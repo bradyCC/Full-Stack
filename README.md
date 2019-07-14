@@ -109,11 +109,29 @@ JSON.stringify($$('.hero-nav > li').map((li, index) => {
 18.英雄详情页
 
 
+## 五、发布和部署（阿里云）
 
-## 五、项目地址
+1. 生产环境编译 
+
+2. 购买域名和服务器
+
+3. 域名解析
+
+4. Nginx 安装和配置
+
+5. MongoDB数据库 安装和配置
+
+6. git 安装、配置ssh-key
+
+7. Node.js 安装、配置淘宝镜像
+
+8. 拉取代码、安装pm2并启动项目
+
+
+## 六、项目地址
 GitHub: [Full-Stack](https://github.com/bradyCC/Full-Stack)
 
-## 六、模块
+## 七、模块
 1.lodash
 ```javascript
 // 安装
