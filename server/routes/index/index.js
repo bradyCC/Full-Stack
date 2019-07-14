@@ -183,8 +183,7 @@ module.exports = () => {
   // 获取英雄详情
   router.get('/heroes/:id', async (req, res) => {
     // 详情数据
-    const detail = await Hero.findById(req.params.id)
-      .populate('categories').lean()
+    const detail = await Hero.findById(req.params.id).populate('categories items1 items2 partners.hero').lean()
 
     res.send(detail)
   })

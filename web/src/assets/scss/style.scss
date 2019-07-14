@@ -134,6 +134,21 @@ p {
   border-radius: 0.154rem  /* 2/13 */;
   font-size: map-get($font-sizes, 'sm') * $base-font-size;
   padding: .3rem .6rem;
+  &.btn-lg {
+    background: map-get($colors, 'white-fcfcfc');
+    border: 1px solid map-get($colors, 'white-eceef0');
+    padding: .8rem 0;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    i {
+      margin-right: .5rem;
+      color: map-get($colors, 'primary');
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+  }
 }
 
 // nav

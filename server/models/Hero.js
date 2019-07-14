@@ -32,7 +32,7 @@ const schema = new mongoose.Schema({
   teamTips: { type: String }, // 团战思路
   partners: [
     {
-      hero: { type: mongoose.SchemaTypes.ObjectId, ref: 'Category' }, // 英雄，关联
+      hero: { type: mongoose.SchemaTypes.ObjectId, ref: 'Hero' }, // 英雄，关联
       description: { type: String },  // 描述
     }
   ],
