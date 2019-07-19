@@ -27,6 +27,10 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+// 静态文件托管
+app.use('/', express.static(path.join(__dirname, '/web')));
+app.use('/admin', express.static(path.join(__dirname, '/admin')));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/public/upload', express.static(path.join(__dirname, 'public/upload')));
 

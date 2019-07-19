@@ -6,7 +6,8 @@ import axios from 'axios'
 import router from './router'
 
 const http = axios.create({
-  baseURL: 'http://localhost:3000/admin/api/'
+  baseURL: process.env.VUE_APP_API_URL || '/admin/api/',
+  // baseURL: 'http://localhost:3000/admin/api/'
 })
 
 // axios 请求头
