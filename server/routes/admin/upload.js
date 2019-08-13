@@ -13,7 +13,8 @@ module.exports = function() {
   // 上传图片
   router.post('/', upload.single('file'), async (req, res) => {
     const file = req.file;
-    file.url = `http://localhost:3000/public/upload/${file.filename}`
+    // file.url = `http://localhost:3000/public/upload/${file.filename}`
+    file.url = `http://www.bradycc.com/public/upload/${file.filename}`
     res.send(file);
   });
 
